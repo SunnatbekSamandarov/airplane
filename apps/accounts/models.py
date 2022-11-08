@@ -10,19 +10,19 @@ ClassChoices = [
 
 ]
 class Flight(models.Model):
-    From = models.CharField(_("Qayerdan"),max_length = 50,blank=False)
-    to = models.CharField(_("Qayerga"),max_length = 50,blank=False)
+    From = models.CharField(_("Qayerdan"),blank=False,max_length=60)
+    to = models.CharField(_("Qayerga"),blank=False,max_length=60)
     outbound = models.DateTimeField(_("Boshlanish vaqti"),blank=False)
     Return = models.DateTimeField(_("Qaytish vaqti"),auto_now_add=True,blank=False)
     children = models.IntegerField(_("Bolalar soni"),blank=False)
-    Class = models.CharField(_("Klass"),choices=ClassChoices,blank=False)
+    Class = models.CharField(_("Klass"),choices=ClassChoices,blank=False,max_length=50)
     price = models.IntegerField(_("Narxi"),blank=False)
     count = models.IntegerField(_("Joylar soni"),blank=False)
 
     def __str__(self):
         return self.From
 class Country(models.Model):
-    name = models.Model(_("Nomi"),max_length=50,blank=False)
+    name = models.CharField(_("Nomi"),max_length=50)
 
 class Hotel(models.Model):
     name = models.CharField(_("Mehmonxona nomi"),max_length=50,blank=False)
@@ -44,7 +44,7 @@ class Book(models.Model):
     flight = models.ForeignKey(Flight,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user
+        return str(self.flight)
 
 
 
